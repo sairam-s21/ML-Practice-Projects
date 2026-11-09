@@ -86,4 +86,5 @@ Linear_Regression/
 ├── Linear_Regression.py        # Vectorized NumPy implementation & evaluation methods
 ├── Main.py                     # Synthetic data pipeline, training, comparison & plotting script
 ├── linear_regression_comparison.png  # Matplotlib dual-subplot visual output
+├── Output.png                  # Contains the output of Main.py
 └── README.md                   # Technical documentation
