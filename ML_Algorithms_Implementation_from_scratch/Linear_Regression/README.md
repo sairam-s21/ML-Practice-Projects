@@ -70,8 +70,6 @@ $$\text{MAE} = \frac{1}{m} \sum_{i=1}^{m} \vert{}y_i - \hat{y}_i\vert{}$$
 
 $$R^2 = 1 - \frac{\text{SS}_{\text{res}}}{\text{SS}_{\text{tot}}} = 1 - \frac{\sum_{i=1}^{m} (y_i - \hat{y}_i)^2}{\sum_{i=1}^{m} (y_i - \bar{y})^2}$$
 
-*(where $\bar{y}$ is the empirical mean of the actual target values)*
-
 ---
 
 ## 🛠️ 3. Code Implementation & Modularity
