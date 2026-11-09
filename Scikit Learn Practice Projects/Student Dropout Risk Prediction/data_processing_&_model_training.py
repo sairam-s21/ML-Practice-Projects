@@ -7,32 +7,15 @@ from sklearn.preprocessing import StandardScaler
 
 
 def select_features(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Select relevant features for the analysis.
-    
-    Args:
-        df (pd.DataFrame): The input DataFrame with student data.
-        
-    Returns:
-        pd.DataFrame: The feature matrix X.
-    """
+   
     # Selecting relevant features
-    
     features = ['Age at enrollment','Gender','Debtor','Tuition fees up to date','Curricular units 1st sem (approved)']
     X = df[features]
     return X
 
 
 def handle_missing_values(X: pd.DataFrame) -> pd.DataFrame:
-    """
-    Handle missing values in the dataset.
 
-    Args:
-        X (pd.DataFrame): The input feature matrix.
-    
-    Returns:
-        pd.DataFrame: The feature matrix with missing values handled.
-    """
     X = X.copy()
 
     # Filling missing values in categorical columns with 'Unknown'
@@ -45,15 +28,7 @@ def handle_missing_values(X: pd.DataFrame) -> pd.DataFrame:
 
 
 def encode_categorical_features(X: pd.DataFrame) -> pd.DataFrame:
-    """
-    Encode categorical features into numeric format using one-hot encoding.
     
-    Args:
-        X (pd.DataFrame): The input feature matrix.
-        
-    Returns:
-        pd.DataFrame: The feature matrix with one-hot encoding applied.
-    """
     # One-hot encoding categorical features
     categorical_cols = ['Gender','Debtor','Tuition fees up to date']
     X=pd.get_dummies(X,columns=categorical_cols,drop_first=True)
@@ -61,33 +36,14 @@ def encode_categorical_features(X: pd.DataFrame) -> pd.DataFrame:
 
 
 def split_data(X: pd.DataFrame, y: pd.Series, test_size: float = 0.3) -> tuple:
-    """
-    Split the dataset into training and testing sets.
     
-    Args:
-        X (pd.DataFrame): The feature matrix.
-        y (pd.Series): The target variable.
-        test_size (float): Proportion of data to use for testing.
-        
-    Returns:
-        tuple: The train-test split of X and y.
-    """
     # Splitting data into training and testing sets
     X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=test_size,random_state=42)
     return X_train, X_test, y_train, y_test
 
 
 def train_decision_tree(X_train: pd.DataFrame, y_train: pd.Series) -> DecisionTreeClassifier:
-    """
-    Train a DecisionTreeClassifier on the training data.
-
-    Args:
-        X_train (pd.DataFrame): The training features.
-        y_train (pd.Series): The training labels.
-        
-    Returns:
-        DecisionTreeClassifier: The trained decision tree model.
-    """
+    
     # Training DecisionTreeClassifier model
     model = DecisionTreeClassifier(random_state=42)
     model.fit(X_train,y_train)
@@ -95,17 +51,7 @@ def train_decision_tree(X_train: pd.DataFrame, y_train: pd.Series) -> DecisionTr
 
 
 def evaluate_model(model: DecisionTreeClassifier, X_test: pd.DataFrame, y_test: pd.Series) -> tuple:
-    """
-    Evaluate the model using accuracy and confusion matrix.
     
-    Args:
-        model (DecisionTreeClassifier): The trained model.
-        X_test (pd.DataFrame): The testing features.
-        y_test (pd.Series): The testing labels.
-        
-    Returns:
-        tuple: Model accuracy and confusion matrix.
-    """
     # Evaluating model predictions and accuracy
     y_pred = model.predict(X_test)
     accuracy = model.score(X_test,y_test)
@@ -114,12 +60,7 @@ def evaluate_model(model: DecisionTreeClassifier, X_test: pd.DataFrame, y_test: 
 
 
 def apply_l2_regularization(X_train: pd.DataFrame, y_train: pd.Series, X_test: pd.DataFrame, y_test: pd.Series) -> LogisticRegression:
-    """
-    Apply L2 regularization (Ridge) using Logistic Regression.
     
-    Returns:
-        LogisticRegression: The trained L2 regularized model.
-    """
     # Scaling the data and training the L2-regularized model
     scaler=StandardScaler()
     X_train_scaled=scaler.fit_transform(X_train)
@@ -134,12 +75,7 @@ def apply_l2_regularization(X_train: pd.DataFrame, y_train: pd.Series, X_test: p
 
 
 def apply_l1_regularization(X_train: pd.DataFrame, y_train: pd.Series, X_test: pd.DataFrame, y_test: pd.Series) -> LogisticRegression:
-    """
-    Apply L1 regularization (Lasso) using Logistic Regression.
-    
-    Returns:
-        LogisticRegression: The trained L1 regularized model.
-    """
+   
     # Scaling the data and training the L1-regularized model
     scaler=StandardScaler()
     X_train_scaled=scaler.fit_transform(X_train)

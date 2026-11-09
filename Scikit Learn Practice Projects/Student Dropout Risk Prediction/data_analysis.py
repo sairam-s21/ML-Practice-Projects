@@ -6,7 +6,6 @@ def load_data(file_path: str) -> pd.DataFrame:
     df = pd.read_csv(file_path)
     return df
 
-
 def explore_data(df: pd.DataFrame):
     
     # Printing the dataset shape
